@@ -12,7 +12,7 @@ const SPEED_CACHORRO = 140
 const SPEED_PEIXE = 30 
 const SPEED_PASSARO = 120
 const JUMP_VELOCITY = -280
-const JUMP_RATO = -180 # NOVO: Pulo bem baixinho para o rato
+const JUMP_RATO = -180
 
 var jump_buffer_time := 0.15 
 var jump_buffer_counter := 0.0
@@ -25,33 +25,37 @@ func _physics_process(delta: float) -> void:
 		if forma_atual != "passaro":
 			velocity += get_gravity() * delta
 	
-	# 2. Lógica do Jump Buffer
-	if Input.is_action_just_pressed("pular"):
+	# 2. Lógica do Jump Buffer (Modificada para pulo contínuo)
+	# Se estiver segurando o botão, o buffer fica sempre cheio
+	if Input.is_action_pressed("pular"):
 		jump_buffer_counter = jump_buffer_time
 	else:
 		jump_buffer_counter -= delta
 
-	# 3. Troca de Formas (Mantido igual)
+	# 3. Troca de Formas
 	if Input.is_action_just_pressed("transformar_rato"):
-		forma_atual = "rato" if forma_atual != "rato" else "humano"
+		trocar_forma("rato")
 	if Input.is_action_just_pressed("transformar_passaro"):
-		forma_atual = "passaro" if forma_atual != "passaro" else "humano"
+		trocar_forma("passaro")
 	if Input.is_action_just_pressed("transformar_cachorro"):
-		forma_atual = "cachorro" if forma_atual != "cachorro" else "humano"
+		trocar_forma("cachorro")
 	if Input.is_action_just_pressed("transformar_peixe"):
-		forma_atual = "peixe" if forma_atual != "peixe" else "humano"
+		trocar_forma("peixe")
 
-	# 4. Pulo (Ajustado para o Rato)
+	# 4. Pulo
+	# O personagem pula se o buffer for > 0 (clicou ou está segurando) e encostou no chão
 	if jump_buffer_counter > 0 and is_on_floor() and forma_atual != "passaro":
-		# Define a força do pulo baseada na forma
 		if forma_atual == "rato":
 			velocity.y = JUMP_RATO
 		else:
 			velocity.y = JUMP_VELOCITY
-			
-		jump_buffer_counter = 0
+		
+		# Se você NÃO estiver segurando o botão, zeramos o buffer. 
+		# Se estiver segurando, o item 2 vai encher ele de novo no próximo frame.
+		if not Input.is_action_pressed("pular"):
+			jump_buffer_counter = 0
 
-	# 5. Movimentação (Mantido igual)
+	# 5. Movimentação
 	if forma_atual == "passaro":
 		var direction_v = Input.get_axis("cima", "baixo")
 		var direction_h = Input.get_axis("esquerda", "direita")
@@ -73,6 +77,15 @@ func _physics_process(delta: float) -> void:
 	
 	atualizar_estado_visual()
 	move_and_slide()
+
+func trocar_forma(nova_forma: String):
+	if forma_atual == nova_forma:
+		forma_atual = "humano"
+	else:
+		forma_atual = nova_forma
+	
+	if forma_atual == "humano" and is_on_floor():
+		position.y -= 10 
 
 func atualizar_estado_visual() -> void:
 	var direction = Input.get_axis("esquerda", "direita")

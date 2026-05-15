@@ -624,7 +624,7 @@ autoplay = "idle_player"
 limit_left = 0
 limit_top = 0
 limit_right = 10000024
-limit_bottom = 100
+limit_bottom = 208
 
 [node name="ColisorRato" type="CollisionShape2D" parent="." unique_id=1266783057]
 position = Vector2(-1, -6)

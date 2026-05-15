@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://cwf3lx6r2kbed"]
+
+[ext_resource type="Texture2D" uid="uid://bmap3g8lmw687" path="res://sprites/tileset/Farmer Story Asset and Backgrounds v2/Farmer Story Backgrounds/Mountains/1 layer Mountains.png" id="3_dtv5i"]
+[ext_resource type="Texture2D" uid="uid://ctygoe1r2aacr" path="res://sprites/tileset/Farmer Story Asset and Backgrounds v2/Farmer Story Backgrounds/Mountains/2 layer Mountains.png" id="4_46q7q"]
+[ext_resource type="Texture2D" uid="uid://i4ffb33lwd6a" path="res://sprites/tileset/Farmer Story Asset and Backgrounds v2/Farmer Story Backgrounds/Mountains/3 layer Mountains.png" id="5_ye6bw"]
+[ext_resource type="Texture2D" uid="uid://bysqu7cy87yfs" path="res://sprites/tileset/Farmer Story Asset and Backgrounds v2/Farmer Story Backgrounds/Mountains/4 layer Mountains.png" id="6_446un"]
+
+[node name="Montanha" type="Node2D" unique_id=998758684]
+
+[node name="Backgroud" type="ParallaxBackground" parent="." unique_id=2098112180]
+
+[node name="1" type="ParallaxLayer" parent="Backgroud" unique_id=571607479]
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(480, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Backgroud/1" unique_id=1675842812]
+position = Vector2(0, -52)
+texture = ExtResource("3_dtv5i")
+centered = false
+
+[node name="2" type="ParallaxLayer" parent="Backgroud" unique_id=444797289]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(480, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Backgroud/2" unique_id=1167823539]
+position = Vector2(-4, -52)
+texture = ExtResource("4_46q7q")
+centered = false
+
+[node name="3" type="ParallaxLayer" parent="Backgroud" unique_id=1337281619]
+motion_scale = Vector2(0.3, 0.3)
+motion_mirroring = Vector2(480, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Backgroud/3" unique_id=1063153186]
+position = Vector2(-2, -53)
+texture = ExtResource("5_ye6bw")
+centered = false
+
+[node name="4" type="ParallaxLayer" parent="Backgroud" unique_id=1918183104]
+modulate = Color(1, 1, 1, 0.59607846)
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(480, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Backgroud/4" unique_id=967699642]
+position = Vector2(-2, -50)
+texture = ExtResource("6_446un")
+centered = false

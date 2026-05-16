@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://dfo2lgkkvfl44"]
+
+[ext_resource type="Script" uid="uid://cbd5h2os734wk" path="res://enemy1.gd" id="1_xnddd"]
+[ext_resource type="Texture2D" uid="uid://c0koochswcgs2" path="res://sprites/2 Dog 2/Walk.png" id="2_xtbss"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p74y7"]
+size = Vector2(34, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yhaby"]
+atlas = ExtResource("2_xtbss")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fiutt"]
+atlas = ExtResource("2_xtbss")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0v10j"]
+atlas = ExtResource("2_xtbss")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_365vo"]
+atlas = ExtResource("2_xtbss")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gkxol"]
+atlas = ExtResource("2_xtbss")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4vkkp"]
+atlas = ExtResource("2_xtbss")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w02cq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yhaby")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fiutt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0v10j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_365vo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gkxol")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4vkkp")
+}],
+"loop": true,
+"name": &"caminhar",
+"speed": 9.0
+}]
+
+[node name="Node2D" type="Node2D" unique_id=261719436]
+
+[node name="enemy1" type="CharacterBody2D" parent="." unique_id=1672003682]
+script = ExtResource("1_xnddd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy1" unique_id=1025001108]
+position = Vector2(-3, 13)
+shape = SubResource("RectangleShape2D_p74y7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="enemy1" unique_id=449848994]
+sprite_frames = SubResource("SpriteFrames_w02cq")
+animation = &"caminhar"
+frame_progress = 0.42903307

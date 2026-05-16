@@ -1,0 +1,15 @@
+[gd_scene format=4 uid="uid://b25ii3e7x2sjv"]
+
+[ext_resource type="PackedScene" uid="uid://bm8cbr0svaxwx" path="res://entities/player.tscn" id="1_t2d2g"]
+[ext_resource type="PackedScene" uid="uid://cwf3lx6r2kbed" path="res://sprites/tileset/montanha.tscn" id="2_lnpyj"]
+[ext_resource type="TileSet" uid="uid://brfxmth638vbp" path="res://sprites/tileset/Terrenos.tres" id="3_pbybl"]
+
+[node name="Nivel1" type="Node2D" unique_id=927154964]
+
+[node name="player" parent="." unique_id=171054834 instance=ExtResource("1_t2d2g")]
+
+[node name="Montanha" parent="player" unique_id=998758684 instance=ExtResource("2_lnpyj")]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=2046204842]
+tile_map_data = PackedByteArray("AAAAAAwAAQAUAA4AAAABAAwAAQAUAA4AAAACAAwAAQAUAA4AAAADAAwAAQAUAA4AAAAEAAwAAQAUAA4AAAAFAAwAAQAUAA4AAAAGAAwAAQAUAA4AAAAHAAwAAQAUAA4AAAAIAAwAAQAUAA4AAAAJAAwAAQAUAA4AAAAKAAwAAQAUAA4AAAALAAwAAQAUAA4AAAAMAAwAAQAUAA4AAAANAAwAAQAUAA4AAAAOAAwAAQAUAA4AAAAPAAwAAQAUAA4AAAAQAAwAAQAUAA4AAAARAAwAAQAUAA4AAAASAAwAAQAUAA4AAAA=")
+tile_set = ExtResource("3_pbybl")

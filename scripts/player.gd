@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var colisor_rato: CollisionShape2D = $ColisorRato
 @onready var colisor_passaro: CollisionShape2D = $ColisorPassaro
 @onready var colisor_cachorro: CollisionShape2D = $ColisorCachorro
-@onready var colisor_peixe: CollisionShape2D = $ColisorPeixe 
+@onready var colisor_peixe: CollisionShape2D = $ColisorPeixe
 
 const SPEED = 80
 const SPEED_CACHORRO = 140
@@ -20,15 +20,18 @@ var jump_buffer_counter := 0.0
 
 var forma_atual := "humano"
 
+func _ready() -> void:
+	atualizar_estado_visual()
+
 func _physics_process(delta: float) -> void:
 	# 1. Gravidade Condicional
 	if not is_on_floor():
 		if forma_atual != "passaro":
 			velocity += get_gravity() * delta
 	
-	# 2. Lógica do Jump Buffer (Modificada para pulo contínuo)
-	# Se estiver segurando o botão, o buffer fica sempre cheio
-	if Input.is_action_pressed("pular"):
+	# 2. Lógica do Jump Buffer (CORRIGIDA para pulo único)
+	# Alterado para is_action_just_pressed para não pular repetidamente ao segurar
+	if Input.is_action_just_pressed("pular"):
 		jump_buffer_counter = jump_buffer_time
 	else:
 		jump_buffer_counter -= delta
@@ -44,21 +47,16 @@ func _physics_process(delta: float) -> void:
 		trocar_forma("peixe")
 
 	# 4. Pulo
-	# O personagem pula se o buffer for > 0 (clicou ou está segurando) e encostou no chão
 	if jump_buffer_counter > 0 and is_on_floor() and forma_atual != "passaro":
 		if forma_atual == "rato":
 			velocity.y = JUMP_RATO
-			
 		elif forma_atual == "cachorro":
 			velocity.y = JUMP_CACHORRO
-			
 		else:
 			velocity.y = JUMP_VELOCITY
 		
-		# Se você NÃO estiver segurando o botão, zeramos o buffer. 
-		# Se estiver segurando, o item 2 vai encher ele de novo no próximo frame.
-		if not Input.is_action_pressed("pular"):
-			jump_buffer_counter = 0
+		# Zera o buffer após pular para evitar repetição no próximo frame
+		jump_buffer_counter = 0
 
 	# 5. Movimentação
 	if forma_atual == "passaro":
@@ -107,6 +105,7 @@ func atualizar_estado_visual() -> void:
 			if not is_on_floor(): animated.play("rato_pulando")
 		"passaro":
 			colisor_passaro.set_deferred("disabled", false)
+			# Restaurado para sua lógica original:
 			if velocity.length() > 0: animated.play("voar_passaro")
 			elif is_on_floor(): animated.play("idle_passaro")
 			else: animated.play("voar_passaro")

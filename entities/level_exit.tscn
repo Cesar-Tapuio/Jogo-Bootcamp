@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://c18t1qwie2xkf"]
+
+[ext_resource type="Script" uid="uid://dig2bfv6qrofu" path="res://entities/level_exit.gd" id="1_dyx2v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l1i0d"]
+size = Vector2(10, 207)
+
+[node name="LevelExit" type="Area2D" unique_id=910250701]
+collision_layer = 0
+collision_mask = 1
+script = ExtResource("1_dyx2v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=502184585]
+position = Vector2(0, -16)
+shape = SubResource("RectangleShape2D_l1i0d")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1768713706]
+visible = false

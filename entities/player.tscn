@@ -14,8 +14,8 @@
 [ext_resource type="Texture2D" uid="uid://dfpnthiw7rpao" path="res://sprites/peixe-espada/Death.png" id="9_q0i8f"]
 [ext_resource type="Texture2D" uid="uid://bph8mcbe7rfjj" path="res://sprites/peixe-espada/Walk.png" id="10_0i614"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u3f3p"]
-height = 26.0
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kdgjc"]
+size = Vector2(8, 22)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ef06p"]
 atlas = ExtResource("2_e4p34")
@@ -606,18 +606,20 @@ size = Vector2(11, 11.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vvm6c"]
 size = Vector2(15, 6.5)
 
-[node name="player" type="CharacterBody2D" unique_id=171054834]
+[node name="player" type="CharacterBody2D" unique_id=171054834 groups=["player"]]
 script = ExtResource("1_merdl")
 
 [node name="ColisorPlayer" type="CollisionShape2D" parent="." unique_id=1312703981]
-shape = SubResource("CapsuleShape2D_u3f3p")
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_kdgjc")
+disabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=803743700]
 z_index = 1
 position = Vector2(0, -10)
 scale = Vector2(0.375, 0.359375)
 sprite_frames = SubResource("SpriteFrames_i623q")
-animation = &"voar_passaro"
+animation = &"idle_player"
 autoplay = "idle_player"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1845951415]
@@ -628,6 +630,7 @@ limit_bottom = 208
 [node name="ColisorRato" type="CollisionShape2D" parent="." unique_id=1266783057]
 position = Vector2(-1, -6)
 shape = SubResource("RectangleShape2D_qly61")
+disabled = true
 
 [node name="ColisorPassaro" type="CollisionShape2D" parent="." unique_id=1173254329]
 position = Vector2(-0.5, -7.625)
@@ -637,7 +640,9 @@ disabled = true
 [node name="ColisorCachorro" type="CollisionShape2D" parent="." unique_id=1327709008]
 position = Vector2(-2.5, -7.25)
 shape = SubResource("RectangleShape2D_voruf")
+disabled = true
 
 [node name="ColisorPeixe" type="CollisionShape2D" parent="." unique_id=1259463651]
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape2D_vvm6c")
+disabled = true

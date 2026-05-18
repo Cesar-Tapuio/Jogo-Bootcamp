@@ -33,4 +33,4 @@ func _update_sprite_direction() -> void:
 	if direction > 0:
 		animated_sprite.flip_h = false  # Desliga a inversão quando vai para a direita
 	else:
-		animated_sprite.flip_h = true   # Liga a inversão quando vai para a esquerdadad
+		animated_sprite.flip_h = true   # Liga a inversão quando vai para a esquerda

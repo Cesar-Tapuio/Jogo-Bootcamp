@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://bynbxor1k6aq3"]
+
+[ext_resource type="Script" uid="uid://4ny6uw4ebxuk" path="res://entities/bola_fogo.gd" id="1_j1qm2"]
+[ext_resource type="Texture2D" uid="uid://bapko8wh1ctdn" path="res://sprites/tileset/Farmer Story Asset and Backgrounds v2/Farmer Story Sprites/Farmer Story Sprites.png" id="1_jlcd8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_j1qm2"]
+radius = 4.0
+height = 8.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4f1k"]
+atlas = ExtResource("1_jlcd8")
+region = Rect2(368, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ly2kg"]
+atlas = ExtResource("1_jlcd8")
+region = Rect2(384, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6abk4"]
+atlas = ExtResource("1_jlcd8")
+region = Rect2(400, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4fmb3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j4f1k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ly2kg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6abk4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 9.0
+}]
+
+[node name="bolaFogo" type="CharacterBody2D" unique_id=1342110676]
+script = ExtResource("1_j1qm2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1397860752]
+shape = SubResource("CapsuleShape2D_j1qm2")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=588011041]
+position = Vector2(-2, -1)
+sprite_frames = SubResource("SpriteFrames_4fmb3")
+frame_progress = 0.5082735

@@ -598,7 +598,7 @@ animations = [{
 size = Vector2(7, 3)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qsoyl"]
-size = Vector2(5, 5.25)
+size = Vector2(9, 5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_voruf"]
 size = Vector2(11, 11.5)
@@ -619,7 +619,7 @@ z_index = 1
 position = Vector2(0, -10)
 scale = Vector2(0.375, 0.359375)
 sprite_frames = SubResource("SpriteFrames_i623q")
-animation = &"idle_player"
+animation = &"voar_passaro"
 autoplay = "idle_player"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1845951415]
@@ -633,7 +633,7 @@ shape = SubResource("RectangleShape2D_qly61")
 disabled = true
 
 [node name="ColisorPassaro" type="CollisionShape2D" parent="." unique_id=1173254329]
-position = Vector2(-0.5, -7.625)
+position = Vector2(-0.5, -8.5)
 shape = SubResource("RectangleShape2D_qsoyl")
 disabled = true
 

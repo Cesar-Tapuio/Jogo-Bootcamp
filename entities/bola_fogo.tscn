@@ -7,6 +7,9 @@
 radius = 4.0
 height = 8.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_dmg"]
+radius = 14.0
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_j4f1k"]
 atlas = ExtResource("1_jlcd8")
 region = Rect2(368, 48, 16, 16)
@@ -41,6 +44,12 @@ script = ExtResource("1_j1qm2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1397860752]
 shape = SubResource("CapsuleShape2D_j1qm2")
+disabled = true
+
+[node name="DamageArea" type="Area2D" parent="." unique_id=1397860753]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=1397860754]
+shape = SubResource("CircleShape2D_dmg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=588011041]
 position = Vector2(-2, -1)

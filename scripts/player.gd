@@ -9,21 +9,75 @@ extends CharacterBody2D
 
 const SPEED = 80
 const SPEED_CACHORRO = 140
-const SPEED_PEIXE = 30 
+const SPEED_PEIXE = 30
 const SPEED_PASSARO = 120
 const JUMP_VELOCITY = -220
 const JUMP_RATO = -180
 const JUMP_CACHORRO = -310
 
-var jump_buffer_time := 0.15 
+var jump_buffer_time := 0.15
 var jump_buffer_counter := 0.0
 
 var forma_atual := "humano"
 
+var health := 3
+var max_health := 3
+const HUD_SLOTS := 3
+const INVINCIBILITY_TIME := 1.5
+var _invincible := false
+var _invincibility_timer := 0.0
+var _heart_rects: Array = []
+
 func _ready() -> void:
 	atualizar_estado_visual()
+	_create_hud()
+
+func _create_hud() -> void:
+	var hud := CanvasLayer.new()
+	add_child(hud)
+	var container := HBoxContainer.new()
+	container.position = Vector2(4, 4)
+	hud.add_child(container)
+	for i in HUD_SLOTS:
+		if i > 0:
+			var sep := Control.new()
+			sep.custom_minimum_size = Vector2(2, 0)
+			container.add_child(sep)
+		var heart := ColorRect.new()
+		heart.custom_minimum_size = Vector2(8, 8)
+		heart.color = Color.RED
+		container.add_child(heart)
+		_heart_rects.append(heart)
+
+func _update_hud() -> void:
+	for i in _heart_rects.size():
+		if i >= max_health:
+			_heart_rects[i].color = Color(0.1, 0.1, 0.1)
+		elif i < health:
+			_heart_rects[i].color = Color.RED
+		else:
+			_heart_rects[i].color = Color(0.25, 0.25, 0.25)
+
+func take_damage(amount: int) -> void:
+	if _invincible:
+		return
+	health = max(health - amount, 0)
+	_update_hud()
+	if health <= 0:
+		get_tree().call_deferred("reload_current_scene")
+		return
+	_invincible = true
+	_invincibility_timer = INVINCIBILITY_TIME
 
 func _physics_process(delta: float) -> void:
+	# Invencibilidade pós-dano com efeito de piscar
+	if _invincible:
+		_invincibility_timer -= delta
+		animated.modulate.a = 0.0 if fmod(_invincibility_timer, 0.3) < 0.15 else 1.0
+		if _invincibility_timer <= 0.0:
+			_invincible = false
+			animated.modulate.a = 1.0
+
 	# 1. Gravidade Condicional
 	if not is_on_floor():
 		if forma_atual != "passaro":
@@ -86,9 +140,13 @@ func trocar_forma(nova_forma: String):
 		forma_atual = "humano"
 	else:
 		forma_atual = nova_forma
-	
+
 	if forma_atual == "humano" and is_on_floor():
-		position.y -= 10 
+		position.y -= 10
+
+	max_health = 1 if forma_atual in ["rato", "passaro"] else 3
+	health = min(health, max_health)
+	_update_hud()
 
 func atualizar_estado_visual() -> void:
 	var direction = Input.get_axis("esquerda", "direita")

@@ -8,7 +8,7 @@ var current_scene_path := ""
 var transition_in_progress := false
 
 ## Duração do fade em segundos (0 = sem fade)
-@export var fade_duration: float = 0.5
+var fade_duration: float = 0.5
 
 ## CanvasLayer usado para o fade. Criado dinamicamente.
 var _fade_layer: CanvasLayer = null
@@ -100,7 +100,7 @@ func _remove_fade_ui() -> void:
 		_fade_rect = null
 
 
-func _animate_fade(from: float, to: float) -> void:
+func _animate_fade(_from: float, to: float) -> void:
 	var tween := create_tween()
 	tween.tween_property(_fade_rect, "modulate:a", to, fade_duration)
 	# Não usamos await aqui — cada chamada espera o timer separadamente

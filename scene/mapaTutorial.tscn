@@ -6,7 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://dfo2lgkkvfl44" path="res://entities/enemy1.tscn" id="4_10bus"]
 [ext_resource type="PackedScene" uid="uid://c18t1qwie2xkf" path="res://entities/level_exit.tscn" id="5_4k5n6"]
 [ext_resource type="PackedScene" uid="uid://eb5hog2in4lo" path="res://entities/enemy2.tscn" id="6_1tjd8"]
-[ext_resource type="PackedScene" uid="uid://bynbxor1k6aq3" path="res://entities/bola_fogo.tscn" id="7_10bus"]
 
 [node name="mapa_tutorial" type="Node2D" unique_id=746183645]
 
@@ -33,10 +32,5 @@ next_scene_path = "res://scene/mapa1.tscn"
 [node name="enemy2" parent="." unique_id=374933067 instance=ExtResource("6_1tjd8")]
 position = Vector2(536, 88)
 
-[node name="bolaFogo" parent="enemy2" unique_id=1342110676 instance=ExtResource("7_10bus")]
-position = Vector2(336, 1)
-
 [node name="enemy3" parent="." unique_id=1179917586 instance=ExtResource("6_1tjd8")]
 position = Vector2(872, 89)
-
-[node name="bolaFogo" parent="enemy3" unique_id=1217609403 instance=ExtResource("7_10bus")]

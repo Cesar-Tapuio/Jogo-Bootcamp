@@ -11,8 +11,9 @@ const SPEED = 80
 const SPEED_CACHORRO = 140
 const SPEED_PEIXE = 30 
 const SPEED_PASSARO = 120
-const JUMP_VELOCITY = -280
+const JUMP_VELOCITY = -220
 const JUMP_RATO = -180
+const JUMP_CACHORRO = -310
 
 var jump_buffer_time := 0.15 
 var jump_buffer_counter := 0.0
@@ -47,6 +48,10 @@ func _physics_process(delta: float) -> void:
 	if jump_buffer_counter > 0 and is_on_floor() and forma_atual != "passaro":
 		if forma_atual == "rato":
 			velocity.y = JUMP_RATO
+			
+		elif forma_atual == "cachorro":
+			velocity.y = JUMP_CACHORRO
+			
 		else:
 			velocity.y = JUMP_VELOCITY
 		

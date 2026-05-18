@@ -623,7 +623,6 @@ autoplay = "idle_player"
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1845951415]
 limit_left = 0
 limit_top = 0
-limit_right = 1100
 limit_bottom = 208
 
 [node name="ColisorRato" type="CollisionShape2D" parent="." unique_id=1266783057]

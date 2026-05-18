@@ -3,14 +3,14 @@
 [ext_resource type="PackedScene" uid="uid://bm8cbr0svaxwx" path="res://entities/player.tscn" id="1_gkul1"]
 [ext_resource type="PackedScene" uid="uid://cwf3lx6r2kbed" path="res://sprites/tileset/montanha.tscn" id="1_x112b"]
 [ext_resource type="TileSet" uid="uid://brfxmth638vbp" path="res://sprites/tileset/Terrenos.tres" id="2_y1ol1"]
-[ext_resource type="PackedScene" uid="uid://dfo2lgkkvfl44" path="res://entities/enemy1.tscn" id="3_f2a42"]
+[ext_resource type="PackedScene" path="res://entities/enemy1.tscn" id="3_f2a42"]
 
 [node name="Mapa-Tutorial" type="Node2D" unique_id=746183645]
 
 [node name="Montanha" parent="." unique_id=998758684 instance=ExtResource("1_x112b")]
 
 [node name="Player" parent="." unique_id=171054834 instance=ExtResource("1_gkul1")]
-position = Vector2(79, 17)
+position = Vector2(130, 102)
 scale = Vector2(1.3, 1.3)
 
 [node name="Mapa" type="Node2D" parent="." unique_id=326969256]

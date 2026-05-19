@@ -21,7 +21,7 @@ GameManager="*res://autoload/game_manager.gd"
 
 [display]
 
-window/size/viewport_width=208
+window/size/viewport_width=250
 window/size/viewport_height=138
 window/size/mode=2
 window/stretch/mode="canvas_items"
@@ -92,3 +92,4 @@ textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.071, 0.071, 0.157, 1)

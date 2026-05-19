@@ -617,7 +617,7 @@ disabled = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=803743700]
 z_index = 1
 position = Vector2(0, -10)
-scale = Vector2(0.375, 0.359375)
+scale = Vector2(0.375, 0.375)
 sprite_frames = SubResource("SpriteFrames_i623q")
 animation = &"voar_passaro"
 autoplay = "idle_player"
@@ -626,6 +626,9 @@ autoplay = "idle_player"
 limit_left = 0
 limit_top = 0
 limit_bottom = 208
+position_smoothing_speed = 6.0
+drag_horizontal_enabled = true
+drag_horizontal_offset = 0.15
 
 [node name="ColisorRato" type="CollisionShape2D" parent="." unique_id=1266783057]
 position = Vector2(-1, -6)

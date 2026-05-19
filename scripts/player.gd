@@ -141,10 +141,28 @@ func _physics_process(delta: float) -> void:
 	atualizar_estado_visual()
 	move_and_slide()
 
-func _tem_espaco_para(colisor: CollisionShape2D) -> bool:
+func _colisor_de(forma: String) -> CollisionShape2D:
+	match forma:
+		"rato":     return colisor_rato
+		"passaro":  return colisor_passaro
+		"cachorro": return colisor_cachorro
+		"peixe":    return colisor_peixe
+		_:          return colisor_player
+
+func _tem_espaco_para(forma_alvo: String) -> bool:
+	var col_atual := _colisor_de(forma_atual)
+	var col_alvo := _colisor_de(forma_alvo)
+	var shape_alvo := col_alvo.shape as RectangleShape2D
+	var floor_y := col_atual.global_position.y + (col_atual.shape as RectangleShape2D).size.y * 0.5
+	var topo_alvo := floor_y - shape_alvo.size.y
+	var check := RectangleShape2D.new()
+	check.size = Vector2(shape_alvo.size.x, 2.0)
 	var query := PhysicsShapeQueryParameters2D.new()
-	query.shape = colisor.shape
-	query.transform = colisor.global_transform
+	query.shape = check
+	var t := col_alvo.global_transform
+	t.origin.x = col_alvo.global_position.x
+	t.origin.y = topo_alvo + 1.0
+	query.transform = t
 	query.collision_mask = collision_mask
 	query.exclude = [get_rid()]
 	return get_world_2d().direct_space_state.intersect_shape(query, 1).is_empty()
@@ -156,7 +174,7 @@ func trocar_forma(nova_forma: String):
 	else:
 		forma_pretendida = nova_forma
 
-	if forma_pretendida == "humano" and not _tem_espaco_para(colisor_player):
+	if not _tem_espaco_para(forma_pretendida):
 		return
 
 	forma_atual = forma_pretendida

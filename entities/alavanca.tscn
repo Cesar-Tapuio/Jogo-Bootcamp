@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://di0vwk11bvdxj"]
+
+[ext_resource type="Script" path="res://entities/alavanca.gd" id="0_script"]
+[ext_resource type="Texture2D" uid="uid://bapko8wh1ctdn" path="res://sprites/tileset/Farmer Story Asset and Backgrounds v2/Farmer Story Sprites/Farmer Story Sprites.png" id="1_5wjre"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8g0x8"]
+atlas = ExtResource("1_5wjre")
+region = Rect2(384, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xpaso"]
+atlas = ExtResource("1_5wjre")
+region = Rect2(368, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nui71"]
+atlas = ExtResource("1_5wjre")
+region = Rect2(352, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p2sp3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8g0x8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xpaso")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nui71")
+}],
+"loop": true,
+"name": &"virar alavanca",
+"speed": 5.0
+}]
+
+[node name="alavanca" type="Node2D" unique_id=478063025]
+script = ExtResource("0_script")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=240975666]
+sprite_frames = SubResource("SpriteFrames_p2sp3")
+animation = &"virar alavanca"
+frame = 0
+frame_progress = 0.0

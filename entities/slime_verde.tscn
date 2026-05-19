@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://80ly0cmoq4mr"]
+
+[ext_resource type="Texture2D" uid="uid://bapko8wh1ctdn" path="res://sprites/tileset/Farmer Story Asset and Backgrounds v2/Farmer Story Sprites/Farmer Story Sprites.png" id="1_4sp7a"]
+[ext_resource type="Script" uid="uid://dul8e7t1r3g02" path="res://entities/slime_verde.gd" id="1_sjubc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sjubc"]
+size = Vector2(12, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hv0f1"]
+atlas = ExtResource("1_4sp7a")
+region = Rect2(288, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3h4fk"]
+atlas = ExtResource("1_4sp7a")
+region = Rect2(304, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4y25j"]
+atlas = ExtResource("1_4sp7a")
+region = Rect2(320, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jd66i"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hv0f1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3h4fk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4y25j")
+}],
+"loop": true,
+"name": &"andando",
+"speed": 5.0
+}]
+
+[node name="slime_verde" type="Node2D" unique_id=1670123428]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1018694839]
+script = ExtResource("1_sjubc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1432112647]
+position = Vector2(0, 3.5)
+shape = SubResource("RectangleShape2D_sjubc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1872135180]
+sprite_frames = SubResource("SpriteFrames_jd66i")
+animation = &"andando"
+frame_progress = 0.19277404

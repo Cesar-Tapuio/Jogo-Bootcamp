@@ -12,6 +12,7 @@ signal bola_destruida
 var target: Node2D = null
 var shooter: Node2D = null
 var _age := 0.0
+var _is_destroyed := false
 
 @onready var animated: AnimatedSprite2D = $AnimatedSprite2D
 @onready var damage_area: Area2D = $DamageArea
@@ -32,6 +33,9 @@ func _on_body_entered(body: Node2D) -> void:
 		_destruir()
 
 func _destruir() -> void:
+	if _is_destroyed:
+		return
+	_is_destroyed = true
 	bola_destruida.emit()
 	queue_free()
 

@@ -19,6 +19,7 @@ var jump_buffer_time := 0.15
 var jump_buffer_counter := 0.0
 
 var forma_atual := "humano"
+var _forma_anterior := ""
 
 var health := 3
 var max_health := 3
@@ -28,35 +29,38 @@ var _invincible := false
 var _invincibility_timer := 0.0
 var _heart_rects: Array = []
 
+const TEX_FULL    = preload("res://sprites/heart/heart.png")
+const TEX_EMPTY   = preload("res://sprites/heart/background.png")
+const TEX_UNAVAIL = preload("res://sprites/heart/border.png")
+
 func _ready() -> void:
 	atualizar_estado_visual()
 	_create_hud()
+	_update_hud()
 
 func _create_hud() -> void:
 	var hud := CanvasLayer.new()
 	add_child(hud)
 	var container := HBoxContainer.new()
+	container.add_theme_constant_override("separation", 2)
 	container.position = Vector2(4, 4)
 	hud.add_child(container)
 	for i in HUD_SLOTS:
-		if i > 0:
-			var sep := Control.new()
-			sep.custom_minimum_size = Vector2(2, 0)
-			container.add_child(sep)
-		var heart := ColorRect.new()
-		heart.custom_minimum_size = Vector2(8, 8)
-		heart.color = Color.RED
+		var heart := TextureRect.new()
+		heart.texture = TEX_FULL
+		heart.custom_minimum_size = Vector2(17, 17)
+		heart.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		container.add_child(heart)
 		_heart_rects.append(heart)
 
 func _update_hud() -> void:
 	for i in _heart_rects.size():
 		if i >= max_health:
-			_heart_rects[i].color = Color(0.1, 0.1, 0.1)
+			_heart_rects[i].texture = TEX_UNAVAIL
 		elif i < health:
-			_heart_rects[i].color = Color.RED
+			_heart_rects[i].texture = TEX_FULL
 		else:
-			_heart_rects[i].color = Color(0.25, 0.25, 0.25)
+			_heart_rects[i].texture = TEX_EMPTY
 
 func take_damage(amount: int) -> void:
 	if _invincible:
@@ -65,6 +69,7 @@ func take_damage(amount: int) -> void:
 	_update_hud()
 	if health <= 0:
 		_invincible = true
+		_invincibility_timer = INVINCIBILITY_TIME
 		get_tree().call_deferred("reload_current_scene")
 		return
 	_invincible = true
@@ -136,46 +141,65 @@ func _physics_process(delta: float) -> void:
 	atualizar_estado_visual()
 	move_and_slide()
 
+func _tem_espaco_para(colisor: CollisionShape2D) -> bool:
+	var query := PhysicsShapeQueryParameters2D.new()
+	query.shape = colisor.shape
+	query.transform = colisor.global_transform
+	query.collision_mask = collision_mask
+	query.exclude = [get_rid()]
+	return get_world_2d().direct_space_state.intersect_shape(query, 1).is_empty()
+
 func trocar_forma(nova_forma: String):
+	var forma_pretendida: String
 	if forma_atual == nova_forma:
-		forma_atual = "humano"
+		forma_pretendida = "humano"
 	else:
-		forma_atual = nova_forma
+		forma_pretendida = nova_forma
+
+	if forma_pretendida == "humano" and not _tem_espaco_para(colisor_player):
+		return
+
+	forma_atual = forma_pretendida
 
 	if forma_atual == "humano" and is_on_floor():
 		position.y -= 10
 
+	var old_health := health
+	var old_max := max_health
 	max_health = 1 if forma_atual in ["rato", "passaro"] else 3
 	health = min(health, max_health)
-	_update_hud()
+	if health != old_health or max_health > old_max:
+		_update_hud()
 
 func atualizar_estado_visual() -> void:
+	if forma_atual != _forma_anterior:
+		_forma_anterior = forma_atual
+		colisor_player.set_deferred("disabled", true)
+		colisor_rato.set_deferred("disabled", true)
+		colisor_passaro.set_deferred("disabled", true)
+		colisor_cachorro.set_deferred("disabled", true)
+		colisor_peixe.set_deferred("disabled", true)
+		match forma_atual:
+			"rato":     colisor_rato.set_deferred("disabled", false)
+			"passaro":  colisor_passaro.set_deferred("disabled", false)
+			"cachorro": colisor_cachorro.set_deferred("disabled", false)
+			"peixe":    colisor_peixe.set_deferred("disabled", false)
+			"humano":   colisor_player.set_deferred("disabled", false)
+
 	var direction = Input.get_axis("esquerda", "direita")
-	colisor_player.set_deferred("disabled", true)
-	colisor_rato.set_deferred("disabled", true)
-	colisor_passaro.set_deferred("disabled", true)
-	colisor_cachorro.set_deferred("disabled", true)
-	colisor_peixe.set_deferred("disabled", true)
-	
 	match forma_atual:
 		"rato":
-			colisor_rato.set_deferred("disabled", false)
 			animated.play("rato_correndo" if direction != 0 else "idle_rato")
 			if not is_on_floor(): animated.play("rato_pulando")
 		"passaro":
-			colisor_passaro.set_deferred("disabled", false)
-			# Restaurado para sua lógica original:
 			if velocity.length() > 0: animated.play("voar_passaro")
 			elif is_on_floor(): animated.play("idle_passaro")
 			else: animated.play("voar_passaro")
 		"cachorro":
-			colisor_cachorro.set_deferred("disabled", false)
 			animated.play("cao_correndo" if direction != 0 else "idle_cao")
 			if not is_on_floor(): animated.play("cao_pulando")
 		"peixe":
-			colisor_peixe.set_deferred("disabled", false)
 			animated.play("peixe_debatendo")
 		"humano":
-			colisor_player.set_deferred("disabled", false)
 			animated.play("caminhar_player" if direction != 0 else "idle_player")
 			if not is_on_floor(): animated.play("pulo_player")

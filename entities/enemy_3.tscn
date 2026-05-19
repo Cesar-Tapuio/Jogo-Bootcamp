@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://bk1kf1s82iebf"]
+
+[ext_resource type="Script" path="res://entities/enemy3.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://bapko8wh1ctdn" path="res://sprites/tileset/Farmer Story Asset and Backgrounds v2/Farmer Story Sprites/Farmer Story Sprites.png" id="1_mblor"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ajw8w"]
+atlas = ExtResource("1_mblor")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_en6b0"]
+atlas = ExtResource("1_mblor")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g57qv"]
+atlas = ExtResource("1_mblor")
+region = Rect2(80, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ubut5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ajw8w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_en6b0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g57qv")
+}],
+"loop": true,
+"name": &"caminhando",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_67wf8"]
+size = Vector2(9, 14)
+
+[node name="enemy3" type="CharacterBody2D" unique_id=1238630091]
+script = ExtResource("1_script")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1500733701]
+sprite_frames = SubResource("SpriteFrames_ubut5")
+animation = &"caminhando"
+frame = 2
+frame_progress = 0.07753352
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1419959907]
+position = Vector2(-0.5, 1)
+shape = SubResource("RectangleShape2D_67wf8")

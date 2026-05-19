@@ -1,0 +1,34 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://entities/enemy4.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://bapko8wh1ctdn" path="res://sprites/tileset/Farmer Story Asset and Backgrounds v2/Farmer Story Sprites/Farmer Story Sprites.png" id="2_sprite"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bat1"]
+atlas = ExtResource("2_sprite")
+region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bat2"]
+atlas = ExtResource("2_sprite")
+region = Rect2(112, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bat"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bat1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bat2")
+}],
+"loop": true,
+"name": &"voar",
+"speed": 6.0
+}]
+
+[node name="enemy4" type="Node2D"]
+z_index = 1
+script = ExtResource("1_script")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_bat")
+animation = &"voar"

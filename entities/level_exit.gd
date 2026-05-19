@@ -24,6 +24,8 @@ func _ready() -> void:
 
 	if next_scene_path.is_empty() and next_scene_uid.is_empty():
 		push_error("LevelExit: next_scene_path ou next_scene_uid não configurado em ", name)
+		set_process(false)
+		return
 
 
 func _process(_delta: float) -> void:

@@ -64,6 +64,7 @@ func take_damage(amount: int) -> void:
 	health = max(health - amount, 0)
 	_update_hud()
 	if health <= 0:
+		_invincible = true
 		get_tree().call_deferred("reload_current_scene")
 		return
 	_invincible = true

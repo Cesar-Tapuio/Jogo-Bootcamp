@@ -3,8 +3,11 @@
 [ext_resource type="PackedScene" uid="uid://bm8cbr0svaxwx" path="res://entities/player.tscn" id="1_b2x4c"]
 [ext_resource type="TileSet" uid="uid://brfxmth638vbp" path="res://sprites/tileset/Terrenos.tres" id="2_47u1e"]
 [ext_resource type="PackedScene" uid="uid://c18t1qwie2xkf" path="res://entities/level_exit.tscn" id="3_3k4n5"]
+[ext_resource type="PackedScene" path="res://sprites/tileset/castelo_na_nevoa.tscn" id="4_bg"]
 
 [node name="mapa3" type="Node2D" unique_id=629684835]
+
+[node name="CasteloNaNevoa" parent="." unique_id=629684900 instance=ExtResource("4_bg")]
 
 [node name="player" parent="." unique_id=171054834 instance=ExtResource("1_b2x4c")]
 position = Vector2(114, 170)

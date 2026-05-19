@@ -1,0 +1,36 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://sprites/tileset/Farmer Story Asset and Backgrounds v2/Farmer Story Backgrounds/Forest/1 layer Forest.png" id="1_f1"]
+[ext_resource type="Texture2D" path="res://sprites/tileset/Farmer Story Asset and Backgrounds v2/Farmer Story Backgrounds/Forest/2 layer Forest.png" id="2_f2"]
+[ext_resource type="Texture2D" path="res://sprites/tileset/Farmer Story Asset and Backgrounds v2/Farmer Story Backgrounds/Forest/3 layer Forest.png" id="3_f3"]
+
+[node name="Floresta" type="Node2D" unique_id=200000001]
+
+[node name="Background" type="ParallaxBackground" parent="." unique_id=200000002]
+
+[node name="1" type="ParallaxLayer" parent="Background" unique_id=200000003]
+motion_scale = Vector2(0.1, 0.1)
+motion_mirroring = Vector2(480, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/1" unique_id=200000004]
+position = Vector2(-4, -62)
+texture = ExtResource("1_f1")
+centered = false
+
+[node name="2" type="ParallaxLayer" parent="Background" unique_id=200000005]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(480, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/2" unique_id=200000006]
+position = Vector2(-4, -52)
+texture = ExtResource("2_f2")
+centered = false
+
+[node name="3" type="ParallaxLayer" parent="Background" unique_id=200000007]
+motion_scale = Vector2(0.4, 0.4)
+motion_mirroring = Vector2(480, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/3" unique_id=200000008]
+position = Vector2(-2, -48)
+texture = ExtResource("3_f3")
+centered = false

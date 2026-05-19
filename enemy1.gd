@@ -13,15 +13,18 @@ func _ready() -> void:
 	# Iniciamos a animação quando o inimigo entra na cena
 	animated_sprite.play("caminhar")
 
+const MAX_FALL_SPEED = 600.0
+
 func _physics_process(delta: float) -> void:
 	# 1. Aplicar Gravidade
 	if not is_on_floor():
-		velocity.y += gravity * delta
+		velocity.y = min(velocity.y + gravity * delta, MAX_FALL_SPEED)
 
 	# 2. Verificar colisões com paredes
 	if is_on_wall():
 		direction *= -1
 		_update_sprite_direction()
+		animated_sprite.play("caminhar")
 
 	# 3. Movimentação
 	velocity.x = direction * speed

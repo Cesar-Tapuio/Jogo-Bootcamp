@@ -2,7 +2,7 @@ extends Node2D
 
 @export var raio: float = 35.0
 
-@onready var animated: AnimatedSprite2D = $CharacterBody2D/AnimatedSprite2D
+@onready var animated: AnimatedSprite2D = $AnimatedSprite2D
 
 func _ready() -> void:
 	visible = false

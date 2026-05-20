@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://c2dsp0aqxe3fl"]
+
+[ext_resource type="Texture2D" uid="uid://bapko8wh1ctdn" path="res://sprites/tileset/Farmer Story Asset and Backgrounds v2/Farmer Story Sprites/Farmer Story Sprites.png" id="1_e0mny"]
+[ext_resource type="Script" path="res://entities/arqueiro/flecha.gd" id="2_flecha"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_u670y"]
+a = Vector2(-4, 0)
+b = Vector2(5, 0)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bqjo0"]
+atlas = ExtResource("1_e0mny")
+region = Rect2(240, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rhkyh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bqjo0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="flecha" type="Node2D" unique_id=1468004725]
+script = ExtResource("2_flecha")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=903326067]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1191501184]
+shape = SubResource("SegmentShape2D_u670y")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1862819802]
+sprite_frames = SubResource("SpriteFrames_rhkyh")

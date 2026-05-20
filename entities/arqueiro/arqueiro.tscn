@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://dalnee65mc4d4"]
+
+[ext_resource type="Texture2D" uid="uid://bapko8wh1ctdn" path="res://sprites/tileset/Farmer Story Asset and Backgrounds v2/Farmer Story Sprites/Farmer Story Sprites.png" id="1_xk86t"]
+[ext_resource type="Script" path="res://entities/arqueiro/arqueiro.gd" id="2_arqueiro"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ivwk"]
+size = Vector2(8, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dtdbw"]
+atlas = ExtResource("1_xk86t")
+region = Rect2(352, 96, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_efba0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dtdbw")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="arqueiro" type="Node2D" unique_id=232765866]
+script = ExtResource("2_arqueiro")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=2128852670]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1894243050]
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_0ivwk")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=563602796]
+sprite_frames = SubResource("SpriteFrames_efba0")
+animation = &"idle"
+frame_progress = 0.11360488

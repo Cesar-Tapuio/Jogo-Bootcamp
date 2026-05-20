@@ -11,7 +11,11 @@
       "Bash(python -c ' *)",
       "Bash(python *)",
       "Bash(\"/c/Users/Administrator/Downloads/Engine/Godot_v4.6.2-stable_win64_console.exe\")",
-      "Bash(cat \"/c/Users/Administrator/AppData/Roaming/Godot/app_userdata/Jogo-bootcamp/logs/godot.log\")"
+      "Bash(cat \"/c/Users/Administrator/AppData/Roaming/Godot/app_userdata/Jogo-bootcamp/logs/godot.log\")",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\Administrator\\\\Documents\\\\jogo-bootcamp\" -Recurse -ErrorAction SilentlyContinue)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\Administrator\\\\Documents\\\\jogo-bootcamp\" -Recurse -Filter \"*.gd\")",
+      "Bash(Sort-Object LastWriteTime -Descending)",
+      "Bash(Select-Object -First 10 FullName, LastWriteTime)"
     ]
   }
 }

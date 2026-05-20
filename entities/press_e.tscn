@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bxtkgod2pr823"]
 
 [ext_resource type="Texture2D" uid="uid://bapko8wh1ctdn" path="res://sprites/tileset/Farmer Story Asset and Backgrounds v2/Farmer Story Sprites/Farmer Story Sprites.png" id="1_1iww8"]
-[ext_resource type="Script" path="res://entities/press_e.gd" id="2_press_e"]
+[ext_resource type="Script" uid="uid://b33ytqvrqpgj1" path="res://entities/press_e.gd" id="2_press_e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qrg1g"]
 atlas = ExtResource("1_1iww8")
@@ -22,15 +22,13 @@ animations = [{
 }],
 "loop": true,
 "name": &"animation",
-"speed": 1.0
+"speed": 2.0
 }]
 
 [node name="press_E" type="Node2D" unique_id=2033651714]
 script = ExtResource("2_press_e")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=394963930]
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1104790824]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1104790824]
 modulate = Color(1, 1, 1, 0.32156864)
 sprite_frames = SubResource("SpriteFrames_ae52b")
 animation = &"animation"

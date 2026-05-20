@@ -155,17 +155,13 @@ func _tem_espaco_para(forma_alvo: String) -> bool:
 	var shape_alvo := col_alvo.shape as RectangleShape2D
 	var floor_y := col_atual.global_position.y + (col_atual.shape as RectangleShape2D).size.y * 0.5
 	var topo_alvo := floor_y - shape_alvo.size.y
-	var check := RectangleShape2D.new()
-	check.size = Vector2(shape_alvo.size.x, 2.0)
-	var query := PhysicsShapeQueryParameters2D.new()
-	query.shape = check
-	var t := col_alvo.global_transform
-	t.origin.x = col_alvo.global_position.x
-	t.origin.y = topo_alvo + 1.0
-	query.transform = t
-	query.collision_mask = collision_mask
+	var query := PhysicsRayQueryParameters2D.create(
+		Vector2(global_position.x, floor_y - 1.0),
+		Vector2(global_position.x, topo_alvo),
+		collision_mask
+	)
 	query.exclude = [get_rid()]
-	return get_world_2d().direct_space_state.intersect_shape(query, 1).is_empty()
+	return get_world_2d().direct_space_state.intersect_ray(query).is_empty()
 
 func trocar_forma(nova_forma: String):
 	var forma_pretendida: String

@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://bfskkym04u38a"]
+
+[ext_resource type="Texture2D" uid="uid://bapko8wh1ctdn" path="res://sprites/tileset/Farmer Story Asset and Backgrounds v2/Farmer Story Sprites/Farmer Story Sprites.png" id="1_dit11"]
+[ext_resource type="Script" path="res://entities/arqueiro/arco.gd" id="2_arco"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8gt8b"]
+atlas = ExtResource("1_dit11")
+region = Rect2(192, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_asq8a"]
+atlas = ExtResource("1_dit11")
+region = Rect2(208, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_odxvu"]
+atlas = ExtResource("1_dit11")
+region = Rect2(224, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p3150"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8gt8b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_asq8a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_odxvu")
+}],
+"loop": true,
+"name": &"Atirar",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uxuel"]
+size = Vector2(4, 12)
+
+[node name="Arco" type="Node2D" unique_id=12779558]
+script = ExtResource("2_arco")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1860332804]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=145063446]
+sprite_frames = SubResource("SpriteFrames_p3150")
+animation = &"Atirar"
+frame_progress = 0.63695425
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1252667189]
+shape = SubResource("RectangleShape2D_uxuel")

@@ -16,7 +16,6 @@ var _fade_rect: ColorRect = null
 
 
 func _ready() -> void:
-	# Armazena a cena inicial
 	current_scene_path = get_tree().current_scene.scene_file_path
 
 

@@ -5,11 +5,9 @@ extends CharacterBody2D
 @onready var colisor_rato: CollisionShape2D = $ColisorRato
 @onready var colisor_passaro: CollisionShape2D = $ColisorPassaro
 @onready var colisor_cachorro: CollisionShape2D = $ColisorCachorro
-@onready var colisor_peixe: CollisionShape2D = $ColisorPeixe
 
 const SPEED = 80
 const SPEED_CACHORRO = 140
-const SPEED_PEIXE = 30
 const SPEED_PASSARO = 120
 const JUMP_VELOCITY = -220
 const JUMP_RATO = -180
@@ -75,7 +73,23 @@ func take_damage(amount: int) -> void:
 	_invincible = true
 	_invincibility_timer = INVINCIBILITY_TIME
 
+func _morrer() -> void:
+	if _invincible:
+		return
+	health = 0
+	_update_hud()
+	_invincible = true
+	get_tree().call_deferred("reload_current_scene")
+
 func _physics_process(delta: float) -> void:
+	# Morte por líquido
+	if not _invincible:
+		for zona in get_tree().get_nodes_in_group("liquido"):
+			var area := zona as Area2D
+			if area != null and area.get_overlapping_bodies().has(self):
+				_morrer()
+				return
+
 	# Invencibilidade pós-dano com efeito de piscar
 	if _invincible:
 		_invincibility_timer -= delta
@@ -88,9 +102,8 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		if forma_atual != "passaro":
 			velocity += get_gravity() * delta
-	
-	# 2. Lógica do Jump Buffer (CORRIGIDA para pulo único)
-	# Alterado para is_action_just_pressed para não pular repetidamente ao segurar
+
+	# 2. Lógica do Jump Buffer
 	if Input.is_action_just_pressed("pular"):
 		jump_buffer_counter = jump_buffer_time
 	else:
@@ -103,8 +116,6 @@ func _physics_process(delta: float) -> void:
 		trocar_forma("passaro")
 	if Input.is_action_just_pressed("transformar_cachorro"):
 		trocar_forma("cachorro")
-	if Input.is_action_just_pressed("transformar_peixe"):
-		trocar_forma("peixe")
 
 	# 4. Pulo
 	if jump_buffer_counter > 0 and is_on_floor() and forma_atual != "passaro":
@@ -114,8 +125,6 @@ func _physics_process(delta: float) -> void:
 			velocity.y = JUMP_CACHORRO
 		else:
 			velocity.y = JUMP_VELOCITY
-		
-		# Zera o buffer após pular para evitar repetição no próximo frame
 		jump_buffer_counter = 0
 
 	# 5. Movimentação
@@ -130,14 +139,13 @@ func _physics_process(delta: float) -> void:
 		var direction := Input.get_axis("esquerda", "direita")
 		var velocidade_final = SPEED
 		if forma_atual == "cachorro": velocidade_final = SPEED_CACHORRO
-		elif forma_atual == "peixe": velocidade_final = SPEED_PEIXE
-		
+
 		if direction:
 			velocity.x = direction * velocidade_final
 			animated.flip_h = direction < 0
 		else:
 			velocity.x = move_toward(velocity.x, 0, velocidade_final)
-	
+
 	atualizar_estado_visual()
 	move_and_slide()
 
@@ -146,7 +154,6 @@ func _colisor_de(forma: String) -> CollisionShape2D:
 		"rato":     return colisor_rato
 		"passaro":  return colisor_passaro
 		"cachorro": return colisor_cachorro
-		"peixe":    return colisor_peixe
 		_:          return colisor_player
 
 func _tem_espaco_para(forma_alvo: String) -> bool:
@@ -192,12 +199,10 @@ func atualizar_estado_visual() -> void:
 		colisor_rato.set_deferred("disabled", true)
 		colisor_passaro.set_deferred("disabled", true)
 		colisor_cachorro.set_deferred("disabled", true)
-		colisor_peixe.set_deferred("disabled", true)
 		match forma_atual:
 			"rato":     colisor_rato.set_deferred("disabled", false)
 			"passaro":  colisor_passaro.set_deferred("disabled", false)
 			"cachorro": colisor_cachorro.set_deferred("disabled", false)
-			"peixe":    colisor_peixe.set_deferred("disabled", false)
 			"humano":   colisor_player.set_deferred("disabled", false)
 
 	var direction = Input.get_axis("esquerda", "direita")
@@ -212,8 +217,6 @@ func atualizar_estado_visual() -> void:
 		"cachorro":
 			animated.play("cao_correndo" if direction != 0 else "idle_cao")
 			if not is_on_floor(): animated.play("cao_pulando")
-		"peixe":
-			animated.play("peixe_debatendo")
 		"humano":
 			animated.play("caminhar_player" if direction != 0 else "idle_player")
 			if not is_on_floor(): animated.play("pulo_player")

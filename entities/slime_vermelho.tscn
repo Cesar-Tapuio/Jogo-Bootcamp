@@ -38,6 +38,7 @@ animations = [{
 [node name="slime_vermelho" type="Node2D" unique_id=48536411]
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=111118014]
+collision_layer = 0
 script = ExtResource("1_sverm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1407142981]

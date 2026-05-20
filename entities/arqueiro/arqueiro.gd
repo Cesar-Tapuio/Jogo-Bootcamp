@@ -7,7 +7,7 @@ const ARCO_SCENE := preload("res://entities/arqueiro/arco.tscn")
 func _ready() -> void:
 	var arco := ARCO_SCENE.instantiate()
 	add_child(arco)
-	arco.position = Vector2(6, 0)
+	arco.position = Vector2(8, 0)
 	animated.play("idle")
 
 func _process(_delta: float) -> void:

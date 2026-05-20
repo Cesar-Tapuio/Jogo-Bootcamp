@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://eb5hog2in4lo" path="res://entities/enemy2.tscn" id="6_1tjd8"]
 [ext_resource type="PackedScene" uid="uid://bxtkgod2pr823" path="res://entities/press_e.tscn" id="6_10bus"]
 [ext_resource type="PackedScene" uid="uid://jbtliqx2pbau" path="res://entities/slime_vermelho.tscn" id="7_10bus"]
+[ext_resource type="PackedScene" path="res://entities/zona_liquido.tscn" id="8_bnjqw"]
 
 [node name="mapa_tutorial" type="Node2D" unique_id=746183645]
 
@@ -37,3 +38,7 @@ position = Vector2(296, 133)
 
 [node name="slime_vermelho" parent="." unique_id=416077792 instance=ExtResource("7_10bus")]
 position = Vector2(691, 186)
+
+[node name="zona_liquido" parent="." unique_id=1072622414 instance=ExtResource("8_bnjqw")]
+position = Vector2(527.00006, 204)
+scale = Vector2(14, 1)

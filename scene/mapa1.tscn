@@ -5,8 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://c18t1qwie2xkf" path="res://entities/level_exit.tscn" id="3_1k2n3"]
 [ext_resource type="PackedScene" uid="uid://di0vwk11bvdxj" path="res://entities/alavanca.tscn" id="3_o2fju"]
 [ext_resource type="PackedScene" path="res://sprites/tileset/floresta.tscn" id="4_bg"]
+[ext_resource type="PackedScene" uid="uid://bxtkgod2pr823" path="res://entities/press_e.tscn" id="4_h55bq"]
 [ext_resource type="PackedScene" uid="uid://bk1kf1s82iebf" path="res://entities/enemy_3.tscn" id="5_enemy3"]
-[ext_resource type="PackedScene" uid="uid://dfjavpu7cyjjw" path="res://entities/enemy_4.tscn" id="6_enemy4"]
+[ext_resource type="PackedScene" path="res://entities/enemy_4.tscn" id="6_enemy4"]
 
 [node name="mapa1" type="Node2D" unique_id=711398546]
 
@@ -17,7 +18,11 @@ tile_map_data = PackedByteArray("AAAAAAwAAQAAAA0AAAABAAwAAQAAAA0AAAACAAwAAQAAAA0
 tile_set = ExtResource("1_k16vk")
 
 [node name="alavanca" parent="TileMapLayer" unique_id=478063025 instance=ExtResource("3_o2fju")]
+z_index = 1
 position = Vector2(420, 41)
+
+[node name="press_E" parent="TileMapLayer" unique_id=2033651714 instance=ExtResource("4_h55bq")]
+position = Vector2(420, 32)
 
 [node name="player" parent="." unique_id=171054834 instance=ExtResource("2_xtife")]
 position = Vector2(15, 181)

@@ -25,6 +25,7 @@ animations = [{
 script = ExtResource("2_arqueiro")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=2128852670]
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1894243050]
 position = Vector2(1, 0.5)

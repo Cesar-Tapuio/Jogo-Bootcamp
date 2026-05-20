@@ -39,6 +39,7 @@ size = Vector2(4, 12)
 script = ExtResource("2_arco")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1860332804]
+collision_layer = 0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=145063446]
 sprite_frames = SubResource("SpriteFrames_p3150")

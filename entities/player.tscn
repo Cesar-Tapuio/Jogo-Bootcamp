@@ -619,7 +619,7 @@ z_index = 1
 position = Vector2(0, -10)
 scale = Vector2(0.375, 0.375)
 sprite_frames = SubResource("SpriteFrames_i623q")
-animation = &"voar_passaro"
+animation = &"pulo_player"
 autoplay = "idle_player"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1845951415]

@@ -27,8 +27,6 @@ func _physics_process(delta: float) -> void:
 		animated_sprite.play("caminhar")
 
 	# 3. Movimentação
-	velocity.x = direction * speed
-	move_and_slide()
 
 func _update_sprite_direction() -> void:
 	# Se a direção for positiva (Direita), não inverte (ou inverte, dependendo da arte)

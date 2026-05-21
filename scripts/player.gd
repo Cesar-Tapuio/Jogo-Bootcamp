@@ -53,9 +53,8 @@ func _create_hud() -> void:
 
 func _update_hud() -> void:
 	for i in _heart_rects.size():
-		if i >= max_health:
-			_heart_rects[i].texture = TEX_UNAVAIL
-		elif i < health:
+
+		if i < health:
 			_heart_rects[i].texture = TEX_FULL
 		else:
 			_heart_rects[i].texture = TEX_EMPTY
@@ -148,6 +147,11 @@ func _physics_process(delta: float) -> void:
 
 	atualizar_estado_visual()
 	move_and_slide()
+
+func get_feet_y() -> float:
+	var col := _colisor_de(forma_atual)
+	var shape := col.shape as RectangleShape2D
+	return col.global_position.y + shape.size.y * 0.5
 
 func _colisor_de(forma: String) -> CollisionShape2D:
 	match forma:

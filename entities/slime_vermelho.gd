@@ -37,6 +37,7 @@ func _physics_process(delta: float) -> void:
 		if p == null:
 			continue
 		var diff_x := p.global_position.x - global_position.x
-		var diff_y := p.global_position.y - (global_position.y + 8.0)
+		var feet_y: float = p.call("get_feet_y") if p.has_method("get_feet_y") else p.global_position.y
+		var diff_y := feet_y - (global_position.y + 8.0)
 		if abs(diff_x) < 15.0 and abs(diff_y) < 14.0:
 			p.take_damage(1)

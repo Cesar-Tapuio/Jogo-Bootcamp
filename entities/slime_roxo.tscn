@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://b15l2wf43r6q1"]
+
+[ext_resource type="Script" uid="uid://dbptx4hpxcwpb" path="res://entities/sime_roxo.gd" id="1_1rqe3"]
+[ext_resource type="Texture2D" uid="uid://bapko8wh1ctdn" path="res://sprites/tileset/Farmer Story Asset and Backgrounds v2/Farmer Story Sprites/Farmer Story Sprites.png" id="2_ktlol"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bjexx"]
+size = Vector2(18, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bn5j7"]
+atlas = ExtResource("2_ktlol")
+region = Rect2(432, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oaeis"]
+atlas = ExtResource("2_ktlol")
+region = Rect2(448, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jhnf8"]
+atlas = ExtResource("2_ktlol")
+region = Rect2(464, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ps2gw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bn5j7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oaeis")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jhnf8")
+}],
+"loop": true,
+"name": &"andando",
+"speed": 5.0
+}]
+
+[node name="slime_roxo" type="Node2D" unique_id=1852244527]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=2041134792]
+script = ExtResource("1_1rqe3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=2035966270]
+position = Vector2(0, 4)
+shape = SubResource("RectangleShape2D_bjexx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=1811398442]
+sprite_frames = SubResource("SpriteFrames_ps2gw")
+animation = &"andando"
